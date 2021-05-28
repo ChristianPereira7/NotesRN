@@ -1,6 +1,13 @@
 import React, { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Container, AddButton, AddButtonImage, NotesList } from './styles';
+import { Container,
+        AddButton, 
+        AddButtonImage, 
+        NotesList,
+        NoNotes,
+        NoNotesImage,
+        NoNotesText
+    } from './styles';
 import NoteItem from '../../components/NoteItem';
 import { useSelector } from 'react-redux';
 
@@ -8,6 +15,7 @@ import { useSelector } from 'react-redux';
 export default () => {
     const navigation = useNavigation();
     const list = useSelector(state => state.notes.list);
+
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -21,13 +29,16 @@ export default () => {
     }, []);
 
 
-    const handleNotePress  = () => {
-
+    const handleNotePress  = (index) => {
+        navigation.navigate('EditNote', {
+            key: index
+        });
     }
 
 
      return(
     <Container>
+        {list.length > 0 &&
         <NotesList 
             data={list}
             renderItem={({item, index}) => (
@@ -39,6 +50,15 @@ export default () => {
             )}
             keyExtractor={(item, index) => index.toString()}
         />
+        }
+        {list.length == 0 &&
+            <NoNotes>
+                <NoNotesImage source={require('../../assets/note.png')}/>
+                <NoNotesText>
+                    Nenhuma anotação
+                </NoNotesText>
+            </NoNotes>
+        }
     </Container>
 );
 }
