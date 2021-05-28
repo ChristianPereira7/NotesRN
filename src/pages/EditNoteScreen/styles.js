@@ -7,7 +7,7 @@ background-color: #333;
 `;
 
 export const TitleInput = styled.TextInput`
-font-size: 20px;
+font-size: 21px;
 font-weight: bold;
 padding: 15px;
 color: #FFF;
