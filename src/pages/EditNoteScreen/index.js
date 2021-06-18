@@ -4,7 +4,11 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Container,
          TitleInput,
-         BodyInput
+         BodyInput,
+         SaveButton,
+         SaveButtonImage,
+         CloseButton,
+         CloseButtonImage 
         } from './styles';
 
 
@@ -27,6 +31,35 @@ export default () => {
             setBody(list[route.params.key].body)
         }
     }, []);
+
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: status == 'new' ? 'Nova Anotação' : 'Editar Anotação',
+            headerLeft: () =>(
+                <CloseButton underlayColor="transparent" onPress={handleCloseButton}>
+                    <CloseButtonImage source={require('../../assets/close.png')}/>
+                </CloseButton>
+            ),
+            headerRight: () => (
+                <SaveButton underlayColor="transparent" onPress={handleSaveButton}>
+                    <SaveButtonImage source={require('../../assets/save.png')}/>
+                </SaveButton>
+            )
+        });
+    }, [status, title, body]);
+
+    const handleCloseButton = () => {
+        navigation.goBack(); 
+    }
+
+    const handleSaveButton = () => {
+        if(title != '' && body != ''){
+
+        }else {
+            alert("Preencha o título e o corpo")
+        }
+    }
 
     return(
     <Container>

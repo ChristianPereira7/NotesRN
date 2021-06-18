@@ -19,3 +19,22 @@ padding: 15px;
 font-size: 15px;
 color: #FFF;
 `;
+
+export const SaveButton = styled.TouchableHighlight`
+margin-right: 15px;
+`;
+
+export const SaveButtonImage = styled.Image`
+width: 24px;
+height: 24px;
+`;
+
+
+export const CloseButton = styled.TouchableHighlight`
+margin-left: 15px;
+`;
+
+export const CloseButtonImage = styled.Image`
+width: 20px;
+height: 20px;
+`;
